@@ -56,7 +56,7 @@ const LoginForm = () => {
           Sign in
         </button>
       </div>
-      {isError && <ErrorBlock message={error?.data} />}
+      {isError && <ErrorBlock message={error?.data || "Login Failed!"} />}
     </form>
   );
 };

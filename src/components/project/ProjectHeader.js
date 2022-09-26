@@ -2,7 +2,7 @@ import React from "react";
 
 const ProjectHeader = () => {
   return (
-    <div className='px-10 mt-6'>
+    <div className='px-10 mt-6 h-[3rem]'>
       <h1 className='text-2xl font-bold'>Project Board</h1>
     </div>
   );

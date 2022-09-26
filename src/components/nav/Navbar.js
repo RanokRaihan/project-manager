@@ -17,7 +17,7 @@ const Navbar = ({ showSearch }) => {
   };
 
   return (
-    <div className='flex items-center flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75'>
+    <div className='flex items-center flex-shrink-0 w-full h-[4rem] px-10 bg-white bg-opacity-75'>
       <img src={logo} alt='logo' className='h-10 w-10' />
       {showSearch && (
         <input

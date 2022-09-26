@@ -70,8 +70,8 @@ const AddTeamModal = ({ close }) => {
 
   return (
     <div>
-      <div className=' overflow-hidden  fixed top-0  left-0 z-50 w-full md:inset-0 h-modal md:h-full flex bg-neutral-900/[.6] justify-center items-center'>
-        <div className='relative p-4 w-full max-w-md h-full md:h-auto'>
+      <div className=' overflow-hidden  fixed top-0  left-0 z-50 w-full h-screen flex bg-neutral-900/[.6] justify-center items-center'>
+        <div className='relative p-4 w-full max-w-md  md:h-auto'>
           <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
             <button
               onClick={close}

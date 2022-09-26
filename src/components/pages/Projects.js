@@ -4,6 +4,7 @@ import ProjectHeader from "../project/ProjectHeader";
 import Navbar from "./../nav/Navbar";
 
 const Projects = () => {
+  // get teams of loggedin user
   return (
     <>
       <Navbar showSearch={true} />
