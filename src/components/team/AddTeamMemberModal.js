@@ -102,8 +102,11 @@ const AddTeamMemberModal = ({ close, team }) => {
   });
 
   return (
-    <div className=' overflow-hidden  fixed top-0  left-0 z-50 w-full h-screen flex bg-neutral-900/[.6] justify-center items-center'>
-      <div className='relative p-4 w-full max-w-md  md:h-auto'>
+    <div
+      onClick={close}
+      className=' overflow-hidden  animate-fadein fixed top-0 cursor-pointer left-0 z-50 w-full h-screen flex bg-neutral-900/[.6] justify-center items-center'
+    >
+      <div onClick={(e) => e.stopPropagation()} className='relative animate-popup p-4 w-full max-w-md  md:h-auto'>
         <div className='relative bg-white rounded-lg shadow dark:bg-gray-700'>
           <button
             onClick={close}

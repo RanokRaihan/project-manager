@@ -27,7 +27,7 @@ const ProjectContainer = () => {
 
   //request for projects after teams query
   useEffect(() => {
-    if (isTeamQuerySuccess) {
+    if (isTeamQuerySuccess && teams.length !== 0) {
       const query = teams.map((team) => `&teamId=${team.id}`).join("");
       setQueryString(query);
       setRequestProjects(true);
@@ -50,47 +50,52 @@ const ProjectContainer = () => {
       updateProject({ queryString, id: result.draggableId, data: updatedProject });
     }
   };
-  return isProjectQuerySuccess ? (
-    <div className='project-container flex flex-grow w-full h-[calc(100vh-150rem)] px-10 mt-4 space-x-6 '>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <ProjectCategory
-          queryString={queryString}
-          key='backlog'
-          category='backlog'
-          projects={filterProject(projects, "backlog")}
-        />
-        <ProjectCategory
-          queryString={queryString}
-          key='ready'
-          category='ready'
-          projects={filterProject(projects, "ready")}
-        />
-        <ProjectCategory
-          queryString={queryString}
-          key='doing'
-          category='doing'
-          projects={filterProject(projects, "doing")}
-        />
-        <ProjectCategory
-          queryString={queryString}
-          key='review'
-          category='review'
-          projects={filterProject(projects, "review")}
-        />
-        <ProjectCategory
-          queryString={queryString}
-          key='blocked'
-          category='blocked'
-          projects={filterProject(projects, "blocked")}
-        />
-        <ProjectCategory
-          queryString={queryString}
-          key='done'
-          category='done'
-          projects={filterProject(projects, "done")}
-        />
-      </DragDropContext>
-    </div>
+  return isTeamQuerySuccess ? (
+    <>
+      {isTeamQuerySuccess && teams.length === 0 && (
+        <p className='text-md text-rose-600 font-semibold  w-full px-10 mt-4'>You are not in any team!</p>
+      )}
+      <div className=' flex flex-grow w-full h-[calc(100vh-150rem)] px-10 mt-4 space-x-6 '>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <ProjectCategory
+            queryString={queryString}
+            key='backlog'
+            category='backlog'
+            projects={filterProject(projects, "backlog")}
+          />
+          <ProjectCategory
+            queryString={queryString}
+            key='ready'
+            category='ready'
+            projects={filterProject(projects, "ready")}
+          />
+          <ProjectCategory
+            queryString={queryString}
+            key='doing'
+            category='doing'
+            projects={filterProject(projects, "doing")}
+          />
+          <ProjectCategory
+            queryString={queryString}
+            key='review'
+            category='review'
+            projects={filterProject(projects, "review")}
+          />
+          <ProjectCategory
+            queryString={queryString}
+            key='blocked'
+            category='blocked'
+            projects={filterProject(projects, "blocked")}
+          />
+          <ProjectCategory
+            queryString={queryString}
+            key='done'
+            category='done'
+            projects={filterProject(projects, "done")}
+          />
+        </DragDropContext>
+      </div>
+    </>
   ) : (
     <div>Loading...</div>
   );

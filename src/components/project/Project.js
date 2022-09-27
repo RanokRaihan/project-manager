@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 import { useDeleteProjectMutation } from "../../features/projects/projectsApi";
@@ -7,6 +7,7 @@ import CanNotDeleteModal from "./CanNotDeleteModal";
 const Project = ({ project, index, menuId, setMenuId, queryString }) => {
   //local state
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [searchMatched, setSearchMatched] = useState(false);
 
   const { id, title, teamName, timestamp, teamColor, status, creator } = project || {};
 
@@ -16,6 +17,9 @@ const Project = ({ project, index, menuId, setMenuId, queryString }) => {
   };
   //get loggedinuser
   const { email: loggedinEmail } = useSelector((state) => state?.auth?.user) || {};
+
+  //get filter state
+  const { searchString } = useSelector((state) => state.filter);
 
   //delete api
   const [deleteProject] = useDeleteProjectMutation();
@@ -33,6 +37,18 @@ const Project = ({ project, index, menuId, setMenuId, queryString }) => {
       setMenuId(null);
     }
   };
+
+  useEffect(() => {
+    if (searchString.trim().length) {
+      if (title.toLowerCase().includes(searchString.toLowerCase())) {
+        setSearchMatched(true);
+      } else {
+        setSearchMatched(false);
+      }
+    } else {
+      setSearchMatched(false);
+    }
+  }, [searchString, title]);
   return (
     <Draggable draggableId={id.toString()} index={index}>
       {(provided) => (
@@ -40,13 +56,15 @@ const Project = ({ project, index, menuId, setMenuId, queryString }) => {
           {...provided.dragHandleProps}
           {...provided.draggableProps}
           ref={provided.innerRef}
-          className='relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100'
+          className={`${
+            searchMatched ? "animate-glow " : ""
+          }  relative flex flex-col items-start p-4 mt-3  bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100`}
           draggable='true'
         >
           {status === "backlog" && (
             <button
               onClick={() => setMenuId((prev) => (prev === id ? null : id))}
-              className='absolute top-0 right-0 flex items-center justify-center hidden w-5 h-5 mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex'
+              className='absolute top-0 right-0 flex items-center justify-center hidden w-5 h-5  mt-3 mr-2 text-gray-500 rounded hover:bg-gray-200 hover:text-gray-700 group-hover:flex'
             >
               <svg
                 className='w-4 h-4 fill-current'
@@ -60,7 +78,7 @@ const Project = ({ project, index, menuId, setMenuId, queryString }) => {
           )}
           {menuId && menuId === id && (
             <div
-              className={`absolute right-0 mr-2 top-8 z-50 mt-2  origin-top-right overflow-hidden rounded-md bg-red-500 text-white ring-1 ring-black ring-opacity-5 focus:outline-none`}
+              className={`animate-popleft absolute right-0 mr-2 top-8 z-50 mt-2  origin-top-right overflow-hidden rounded-md bg-red-500 text-white ring-1 ring-black ring-opacity-5 focus:outline-none`}
             >
               <ul>
                 <li>

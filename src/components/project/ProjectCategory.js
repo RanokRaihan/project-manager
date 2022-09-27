@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CategoryContainer from "./CategoryContainer";
 import CategoryHeader from "./CategoryHeader";
@@ -6,8 +6,9 @@ import Project from "./Project";
 
 const ProjectCategory = ({ category, projects, ...rest }) => {
   const [menuId, setMenuId] = useState(null);
+
   return (
-    <div className='flex flex-col flex-shrink-0 w-56 mb-4'>
+    <div className='  flex flex-col flex-shrink-0 w-56 mb-4'>
       <CategoryHeader category={category} totalProject={projects.length} />
 
       <CategoryContainer category={category}>

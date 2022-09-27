@@ -6,7 +6,7 @@ const CategoryContainer = ({ children, category }) => {
     <Droppable droppableId={category}>
       {(provided) => (
         <div
-          className='flex flex-col h-full border-2 rounded-md p-2 overflow-auto'
+          className='flex flex-col h-full bg-neutral-600/[.1] rounded-md p-2 overflow-auto'
           ref={provided.innerRef}
           {...provided.droppableProps}
         >

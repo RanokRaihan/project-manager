@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoginMutation } from "../../features/auth/authApi";
 import ErrorBlock from "../ui/ErrorBlock";
 
-const LoginForm = () => {
+const LoginForm = ({ credentials }) => {
+  //destructure
+  const { email: credentialEmail, password: credentialPassword } = credentials || {};
+
+  //local states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [login, { isError, error }] = useLoginMutation();
+
+  useEffect(() => {
+    if (credentialEmail && credentialPassword) {
+      setEmail(credentialEmail);
+      setPassword(credentialPassword);
+    }
+  }, [credentialEmail, credentialPassword]);
 
   //login function
   const handleLogin = (e) => {

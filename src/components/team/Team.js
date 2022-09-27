@@ -1,19 +1,25 @@
 import { useState } from "react";
 import AddTeamMemberModal from "./AddTeamMemberModal";
+import ShowTeamMemberModal from "./ShowTeamMemberModal";
 
 const Team = ({ team, menuId, setMenuId }) => {
   const { id, name, description, timestamp, color } = team;
   const [showAddMemberModal, setShowAddMemberModal] = useState(false);
+  const [showMemberModal, setShowMemberModal] = useState(false);
 
   //
   const openAddmemberModal = () => {
     setMenuId(null);
     setShowAddMemberModal(true);
   };
+  const openShowMemberModal = () => {
+    setMenuId(null);
+    setShowMemberModal(true);
+  };
   return (
     <>
       <div
-        className='relative flex flex-col items-start p-4 mt-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100'
+        className='relative animate-popup flex flex-col items-start p-4 m-3 bg-white rounded-lg cursor-pointer bg-opacity-90 group hover:bg-opacity-100'
         draggable='true'
       >
         <button
@@ -54,12 +60,12 @@ const Team = ({ team, menuId, setMenuId }) => {
         </div>
         {menuId && menuId === id && (
           <div
-            className={`absolute right-0 mr-2 top-8 z-50 mt-2 w-32 origin-top-right overflow-hidden rounded-md bg-${color}-100 ring-1 ring-black ring-opacity-5 focus:outline-none`}
+            className={`absolute animate-popleft right-0 mr-2 top-8 z-50 mt-2 w-32 origin-top-right overflow-hidden rounded-md bg-${color}-100 ring-1 ring-black ring-opacity-5 focus:outline-none`}
           >
             <ul>
               <li>
                 <button
-                  onClick={() => console.log(team.members)}
+                  onClick={openShowMemberModal}
                   className={`px-4 py-2 block w-full text-sm flex items-center gap-2 hover:bg-${color}-600 hover:text-white transition-colors`}
                 >
                   Members
@@ -78,6 +84,7 @@ const Team = ({ team, menuId, setMenuId }) => {
         )}
       </div>
       {showAddMemberModal && <AddTeamMemberModal close={() => setShowAddMemberModal(false)} team={team} />}
+      {showMemberModal && <ShowTeamMemberModal close={() => setShowMemberModal(false)} team={team} />}
     </>
   );
 };

@@ -1,0 +1,84 @@
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 25px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+  margin-block: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 25px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.animate-glow {
+  animation: glow 1s ease-in-out infinite alternate;
+}
+@keyframes glow {
+  0% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(-2px);
+    box-shadow: 0 0 15px #ffee10, 0 0 25px #ffee10, 0 0 35px #ffee10, 0 0;
+  }
+}
+
+.animate-popup {
+  animation: popup 0.8s ease-in-out;
+}
+
+@keyframes popup {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animate-fadein {
+  animation: fadein 0.3s ease-in-out;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-popleft {
+  transform-origin: top right;
+  animation: popleft 0.3s ease;
+}
+
+@keyframes popleft {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
